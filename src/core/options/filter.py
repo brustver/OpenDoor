@@ -26,7 +26,7 @@ class Filter(object):
 
     """Filter class"""
 
-    URL_REGEX = "^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|(?:[-A-Za-z0-9]+\.)+([-A-Za-z]|(?u)\w){2,8}$"
+    URL_REGEX = "^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|(?:[-A-Za-z0-9]+\.)+([-A-Za-z]|(\w){2,8}$"
 
     @staticmethod
     def filter(args):
@@ -92,7 +92,7 @@ class Filter(object):
                 hostname = "http://" + hostname
 
         hostname = helper.parse_url(hostname).netloc
-        regex = re.compile(r"" + Filter.URL_REGEX + "")
+        regex = re.compile(r"" + Filter.URL_REGEX + "", re.UNICODE)
 
         if not regex.match(hostname):
             try:
